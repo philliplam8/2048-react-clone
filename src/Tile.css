@@ -1,0 +1,109 @@
+.square {
+    --square-tile-width: 8rem;
+    background-color: #cdc0b4;
+    border: 1px solid #999;
+    border-radius: 3px;
+    float: left;
+    height: var(--square-tile-width);
+    width: var(--square-tile-width);
+    margin: 2px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* Media Breakpoints */
+
+@media only screen and (max-width: 555px) {
+    .square {
+        --tile-width: 20vw;
+        height: var(--tile-width);
+        width: var(--tile-width);
+    }
+}
+
+/* Tablet */
+/* @media only screen and (max-width: 728px) {
+    .square {
+        height: 17vw;
+        width: 17vw;
+    }
+} */
+
+/* Mobile Large */
+/* @media only screen and (max-width: 425px) {
+    .square {
+        height: 20vw;
+        width: 20vw;
+    }
+} */
+
+/* Mobile Medium */
+/* @media only screen and (max-width: 375px) {
+    .square {
+        height: 18vw;
+        width: 18vw;
+    }
+} */
+
+/* Tile Colours */
+
+.tile-zero h3 {
+    visibility: hidden;
+}
+
+.tile-two {
+    background-color: #eee4da;
+}
+
+.tile-four {
+    background-color: #ede0c8;
+}
+
+.tile-eight {
+    background-color: #f2b179;
+}
+
+.tile-sixteen {
+    background-color: #f59563;
+}
+
+.tile-thirtytwo {
+    background-color: #f67c5f;
+}
+
+.tile-sixtyfour {
+    background-color: #f65d3b;
+}
+
+.tile-hundredtwentyeight {
+    background-color: #edce71;
+}
+
+.tile-twohundredfiftysix {
+    background-color: #f0cc5a;
+}
+
+.tile-fivehundredtwelve {
+    background-color: #edc850;
+}
+
+.tile-thousandtwentyfour {
+    background-color: #edc53f;
+}
+
+.tile-twentyfourtyeight {
+    background-color: #eec22e;
+}
+
+/* Tile Font Colours */
+
+.game-board {
+    color: #f7f7f7;
+}
+
+.tile-two , .tile-four {
+    color: black;
+}
