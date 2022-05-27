@@ -1,8 +1,6 @@
 import React, { useState, createContext } from 'react';
 
 export const TileContext = createContext();
-export const ScoreContext = createContext();
-export const GameContext = createContext();
 
 export const TileProvider = props => {
 
@@ -20,7 +18,8 @@ export const TileProvider = props => {
                     borderBottom: false,
                     tileStyle: 'tile-zero',
                     newTile: '',
-                    justMerged: false
+                    justMerged: false,
+                    justMoved: false
                 },
                 {
                     key: 1,
@@ -32,7 +31,8 @@ export const TileProvider = props => {
                     borderBottom: false,
                     tileStyle: 'tile-zero',
                     newTile: '',
-                    justMerged: false
+                    justMerged: false,
+                    justMoved: false
                 },
                 {
                     key: 2,
@@ -44,7 +44,8 @@ export const TileProvider = props => {
                     borderBottom: false,
                     tileStyle: 'tile-zero',
                     newTile: '',
-                    justMerged: false
+                    justMerged: false,
+                    justMoved: false
                 },
                 {
                     key: 3,
@@ -56,7 +57,8 @@ export const TileProvider = props => {
                     borderBottom: false,
                     tileStyle: 'tile-zero',
                     newTile: '',
-                    justMerged: false
+                    justMerged: false,
+                    justMoved: false
                 },
                 // Second Row
                 {
@@ -69,7 +71,8 @@ export const TileProvider = props => {
                     borderBottom: false,
                     tileStyle: 'tile-zero',
                     newTile: '',
-                    justMerged: false
+                    justMerged: false,
+                    justMoved: false
                 },
                 {
                     key: 5,
@@ -81,7 +84,8 @@ export const TileProvider = props => {
                     borderBottom: false,
                     tileStyle: 'tile-zero',
                     newTile: '',
-                    justMerged: false
+                    justMerged: false,
+                    justMoved: false
                 },
                 {
                     key: 6,
@@ -93,7 +97,8 @@ export const TileProvider = props => {
                     borderBottom: false,
                     tileStyle: 'tile-zero',
                     newTile: '',
-                    justMerged: false
+                    justMerged: false,
+                    justMoved: false
                 },
                 {
                     key: 7,
@@ -105,7 +110,8 @@ export const TileProvider = props => {
                     borderBottom: false,
                     tileStyle: 'tile-zero',
                     newTile: '',
-                    justMerged: false
+                    justMerged: false,
+                    justMoved: false
                 },
                 // Third Row
                 {
@@ -118,7 +124,8 @@ export const TileProvider = props => {
                     borderBottom: false,
                     tileStyle: 'tile-zero',
                     newTile: '',
-                    justMerged: false
+                    justMerged: false,
+                    justMoved: false
                 },
                 {
                     key: 9,
@@ -130,7 +137,8 @@ export const TileProvider = props => {
                     borderBottom: false,
                     tileStyle: 'tile-zero',
                     newTile: '',
-                    justMerged: false
+                    justMerged: false,
+                    justMoved: false
                 },
                 {
                     key: 10,
@@ -142,7 +150,8 @@ export const TileProvider = props => {
                     borderBottom: false,
                     tileStyle: 'tile-zero',
                     newTile: '',
-                    justMerged: false
+                    justMerged: false,
+                    justMoved: false
                 },
                 {
                     key: 11,
@@ -154,7 +163,8 @@ export const TileProvider = props => {
                     borderBottom: false,
                     tileStyle: 'tile-zero',
                     newTile: '',
-                    justMerged: false
+                    justMerged: false,
+                    justMoved: false
                 },
                 // Fourth Row
                 {
@@ -167,7 +177,8 @@ export const TileProvider = props => {
                     borderBottom: true,
                     tileStyle: 'tile-zero',
                     newTile: '',
-                    justMerged: false
+                    justMerged: false,
+                    justMoved: false
                 },
                 {
                     key: 13,
@@ -179,7 +190,8 @@ export const TileProvider = props => {
                     borderBottom: true,
                     tileStyle: 'tile-zero',
                     newTile: '',
-                    justMerged: false
+                    justMerged: false,
+                    justMoved: false
                 },
                 {
                     key: 14,
@@ -191,7 +203,8 @@ export const TileProvider = props => {
                     borderBottom: true,
                     tileStyle: 'tile-zero',
                     newTile: '',
-                    justMerged: false
+                    justMerged: false,
+                    justMoved: false
                 },
                 {
                     key: 15,
@@ -203,7 +216,8 @@ export const TileProvider = props => {
                     borderBottom: true,
                     tileStyle: 'tile-zero',
                     newTile: '',
-                    justMerged: false
+                    justMerged: false,
+                    justMoved: false
                 }
             ]
     });
@@ -213,29 +227,4 @@ export const TileProvider = props => {
         </TileContext.Provider>
 
     );
-}
-
-export const ScoreProvider = props => {
-
-    const [scores, setScores] = useState([0]);
-
-    return (
-        <ScoreContext.Provider value={[scores, setScores]}>
-            {props.chilren}
-        </ScoreContext.Provider>
-    )
-
-}
-
-export const GameProvider = props => {
-
-    const [statuses, setStatuses] = useState({
-        turn: 0
-    });
-
-    return (
-        <GameContext.Provider value={[statuses, setStatuses]}>
-            {props.children}
-        </GameContext.Provider>
-    )
 }

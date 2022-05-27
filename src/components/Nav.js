@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
-import { TileContext } from "./TileContext";
-import getArrayScoreTotal from "./utils/helpers";
+import { TileContext } from "../TileContext";
 import "./Nav.css";
 
 const Nav = () => {
@@ -9,7 +8,7 @@ const Nav = () => {
     return (
         <div className="navbar">
             <h3>2048 Clone</h3>
-            <p>Score: {getArrayScoreTotal(tiles.myBoard)}</p>
+            <p>Score:</p>
         </div>
     );
 }

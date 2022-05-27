@@ -3,7 +3,7 @@
  * @param {Array} boardArray 
  * @returns The numeric sum of all array item values
  */
-function getArrayScoreTotal(boardArray) {
+function getArrayValueTotal(boardArray) {
     let total = 0;
     for (let i = 0; i < boardArray.length; i++) {
         total += boardArray[i].value;
@@ -11,4 +11,4 @@ function getArrayScoreTotal(boardArray) {
     return total;
 }
 
-export default getArrayScoreTotal;
+export default getArrayValueTotal;

@@ -1,13 +1,17 @@
 import './App.css';
 import { TileProvider } from "./TileContext";
-import Nav from './Nav';
-import Game from './Game';
+import Nav from './components/Nav';
+import Board from './components/Board';
+import Footer from './components/Footer';
+
 function App() {
+
   return (
     <TileProvider>
       <div className="App">
         <Nav />
-        <Game />
+        <Board />
+        <Footer />
       </div>
     </TileProvider>
   );

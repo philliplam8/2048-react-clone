@@ -1,15 +1,16 @@
 import React, { useState, useContext, useEffect } from "react";
 import Tile from './Tile';
-import { TileContext } from "./TileContext";
-import getArrayScoreTotal from "./utils/helpers";
-import "./Board.css";
-import anime from 'animejs/lib/anime.es.js';
+import { TileContext } from "../TileContext";
+import getArrayValueTotal from "../utils/helpers";
 import { useSwipeable } from "react-swipeable";
-import { get } from "animejs";
-
+import anime from 'animejs/lib/anime.es.js';
+import "./Board.css";
 /* TODO 
-- score should only reflect when 2 tiles merge
-- new tile should only appear if there is a moveable action
+- score should only reflect when 2 tiles merge (need to understand state and context better)
+- lose condition
+- win condition
+- undo
+- reorganize project directory
 */
 
 function getRandomTileIndex(range) {
@@ -172,10 +173,12 @@ const Board = () => {
                     boardArray[neighbourIndex].value = currentValue;
                     boardArray[neighbourIndex].tileStyle = currentStyle;
                     boardArray[neighbourIndex].empty = currentEmpty;
+                    boardArray[neighbourIndex].justMoved = true;
                     // Remove tile from current position
                     boardArray[destinationIndex].value = 0;
                     boardArray[destinationIndex].tileStyle = 'tile-zero'
                     boardArray[destinationIndex].empty = true;
+                    boardArray[destinationIndex].justMoved = false;
                     // Update indices
                     destinationIndex = getNextIndex(destinationIndex);
                     neighbourIndex = getNextIndex(destinationIndex);
@@ -192,13 +195,16 @@ const Board = () => {
     }
 
     /**
-     * Clear all tiles' merge status i.e. set every tile's state "justMerged" to false
+     * Clear all tiles' merge status i.e. set every tile's state "justMerged" and "justMoved" to false
      * @param {Board} boardArray 
      */
     const prepBoard = (boardArray) => {
         for (let i = 0; i < boardArray.length; i++) {
             if (boardArray[i].justMerged) {
                 boardArray[i].justMerged = false;
+            }
+            if (boardArray[i].justMoved) {
+                boardArray[i].justMoved = false;
             }
         }
     }
@@ -208,7 +214,6 @@ const Board = () => {
         // Make copy of current board array
         let updatedBoard = [...tiles.myBoard]; // ... is the ES6 spread function
         prepBoard(updatedBoard);
-
 
         console.log(`Action: moving tiles ${direction}`);
         switch (direction) {
@@ -236,13 +241,23 @@ const Board = () => {
             default:
                 break;
         }
+
         // Update board
         setTiles({ myBoard: updatedBoard });
+
+        // Only add tiles if the there has been an action (move/merge)
+        for (let i = 0; i < updatedBoard.length; i++) {
+            if (updatedBoard[i].justMoved || updatedBoard[i].justMerged) {
+                addTile();
+                break;
+            }
+        }
+
     }
 
     // Start game and add first tile
     useEffect(() => {
-        let total = getArrayScoreTotal(tiles.myBoard);
+        let total = getArrayValueTotal(tiles.myBoard);
         if (total <= 2) {
             addTile();
         }
@@ -290,7 +305,7 @@ const Board = () => {
                     default:
                         break;
                 }
-                addTile();
+                // addTile();
             }
         }
 
@@ -304,19 +319,19 @@ const Board = () => {
     const mobileHandlers = useSwipeable({
         onSwipedLeft: () => {
             moveAllTiles("left");
-            addTile();
+            // addTile();
         },
         onSwipedRight: () => {
             moveAllTiles("right");
-            addTile();
+            // addTile();
         },
         onSwipedUp: () => {
             moveAllTiles("up");
-            addTile();
+            // addTile();
         },
         onSwipedDown: () => {
             moveAllTiles("down");
-            addTile();
+            // addTile();
         }
     });
 
@@ -341,6 +356,7 @@ const Board = () => {
                             tileStyle={tiles.tileStyle}
                             newTile={tiles.newTile}
                             justMerged={tiles.justMerged}
+                            justMoved={tiles.justMoved}
                         />
                     ))}
                 </div>
