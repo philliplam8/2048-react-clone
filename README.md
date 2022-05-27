@@ -1,5 +1,3 @@
-# Getting Started with Create React App
-
 # 2048 Clone
 This project is an attempt to clone the original 2048 game created by [Gabriele Cirulli](https://github.com/gabrielecirulli) for educational purposes.
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
