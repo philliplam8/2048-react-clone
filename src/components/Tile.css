@@ -1,8 +1,8 @@
 .square {
     --square-tile-width: 8rem;
     background-color: #cdc0b4;
-    border: 1px solid #999;
-    border-radius: 3px;
+    /* border: 1px solid #999; */
+    border-radius: 7px;
     float: left;
     height: var(--square-tile-width);
     width: var(--square-tile-width);

@@ -1,10 +1,12 @@
 import React, { useState, useContext, useEffect } from "react";
+import ScoreboardModal from "./ScoreboardModal";
 import Tile from './Tile';
 import { TileContext } from "../TileContext";
 import getArrayValueTotal from "../utils/helpers";
 import { useSwipeable } from "react-swipeable";
 import anime from 'animejs/lib/anime.es.js';
 import "./Board.css";
+
 /* TODO 
 - score should only reflect when 2 tiles merge (need to understand state and context better)
 - lose condition
@@ -337,6 +339,9 @@ const Board = () => {
 
     return (
         <div>
+            <div>
+                <ScoreboardModal />
+            </div>
             <div>
                 <button onClick={() => { addTile() }}>Add Tile</button>
                 <button onClick={() => { resetBoard() }}>Start Over</button>
