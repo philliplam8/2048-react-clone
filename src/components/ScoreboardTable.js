@@ -6,8 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import CircularProgress from '@mui/material/CircularProgress';
-import Box from '@mui/material/Box';
+import LoadingSpinner from './LoadingIndicator';
 
 const mongoDatabaseEndpoint = 'http://localhost:4000/scoreboard/rankings';
 
@@ -52,11 +51,7 @@ export default function ScoreboardTable() {
     if (error) {
         return <div>Error {error.message}</div>;
     } else if (!isLoaded) {
-        return (
-            <Box sx={{ display: 'flex' }}>
-                <CircularProgress color="inherit" />
-            </Box>
-        );
+        return (<LoadingSpinner />);
     } else {
         return (
             <TableContainer component={Paper}>
