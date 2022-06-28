@@ -98,12 +98,37 @@
     background-color: #eec22e;
 }
 
+.tile-fourtyninetysix {
+    background-color: #6bce11;
+}
+
+.tile-eightyonenintytwo {
+    background-color: #64c009;
+}
+
+.tile-sixteenthreeeightyfour {
+    background-color: #5aba01;
+}
+
+.tile-thirtytwosevensixtyeight {
+    background-color: #52a900;
+}
+
+.tile-sixtyfivefivethirtysix {
+    background-color: #4b8a08;
+}
+
+.tile-onethirtyonezeroseventytwo {
+    background-color: #5a8af8;
+}
+
 /* Tile Font Colours */
 
 .game-board {
     color: #f7f7f7;
 }
 
-.tile-two , .tile-four {
+.tile-two,
+.tile-four {
     color: black;
 }

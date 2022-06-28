@@ -135,6 +135,24 @@ const Board = () => {
             case 2048:
                 boardArray[destinationIndex].tileStyle = "tile-twentyfourtyeight";
                 break;
+            case 4096:
+                boardArray[destinationIndex].tileStyle = "tile-fourtyninetysix";
+                break;
+            case 8192:
+                boardArray[destinationIndex].tileStyle = "tile-eightyonenintytwo";
+                break;
+            case 16384:
+                boardArray[destinationIndex].tileStyle = "tile-sixteenthreeeightyfour";
+                break;
+            case 32768:
+                boardArray[destinationIndex].tileStyle = "tile-thirtytwosevensixtyeight";
+                break;
+            case 65536:
+                boardArray[destinationIndex].tileStyle = "sixtyfivefivethirtysix";
+                break;
+            case 131072:
+                boardArray[destinationIndex].tileStyle = "onethirtyonezeroseventytwo";
+                break;
             default:
                 console.log("No styling beyond 2048");
                 break;
