@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import ScoreboardModal from "./ScoreboardModal";
+import GameOverModal from "./GameOverModal";
 import Tile from './Tile';
 import { TileContext } from "../TileContext";
 import getArrayValueTotal from "../utils/helpers";
@@ -359,6 +360,7 @@ const Board = () => {
         <div>
             <div>
                 <ScoreboardModal />
+                <GameOverModal />
             </div>
             <div>
                 <button onClick={() => { addTile() }}>Add Tile</button>
