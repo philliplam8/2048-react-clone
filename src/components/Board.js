@@ -5,6 +5,7 @@ import Tile from './Tile';
 import { TileContext } from "../TileContext";
 import getArrayValueTotal from "../utils/helpers";
 import { useSwipeable } from "react-swipeable";
+import Button from '@mui/material/Button';
 import anime from 'animejs/lib/anime.es.js';
 import "./Board.css";
 
@@ -359,12 +360,15 @@ const Board = () => {
     return (
         <div>
             <div>
-                <ScoreboardModal />
+                <div className="game-controls">
+                    <Button variant="outlined" onClick={() => { resetBoard() }}>Start Over</Button>
+                    <ScoreboardModal />
+                </div>
                 <GameOverModal />
             </div>
             <div>
                 <button onClick={() => { addTile() }}>Add Tile</button>
-                <button onClick={() => { resetBoard() }}>Start Over</button>
+
             </div>
             <div {...mobileHandlers} className="game">
 

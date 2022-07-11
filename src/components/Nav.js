@@ -8,7 +8,7 @@ const Nav = () => {
     return (
         <div className="navbar">
             <h3>2048 Clone</h3>
-            <p>Score:</p>
+            <p>Score: </p>
         </div>
     );
 }

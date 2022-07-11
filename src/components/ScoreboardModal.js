@@ -13,7 +13,7 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '60%',
+    width: '275px',
     bgcolor: 'background.paper',
     borderRadius: '10px',
     p: 4,
@@ -45,7 +45,7 @@ export default function ScoreboardModal() {
                             Scoreboard
                         </Typography>
                         <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-                            Top 5 scores
+                            Top 5 Scores
                         </Typography>
                         <ScoreboardTable />
                     </Box>
