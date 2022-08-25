@@ -1,15 +1,15 @@
 import * as React from 'react';
 import GameModal from '../UI/GameModal';
 
-export default function GameOverModal(props) {
+export default function NotHighScoreModal(props) {
 
     return (
         <div>
             <GameModal
-                buttonName="Game Over"
-                title="GAME OVER!"
+                buttonName="Not High Score"
+                title="WIN!"
                 scoreSubtitle="Your Score: "
-                subtitle="No more moves"
+                subtitle="Enter your name into the scoreboard"
                 resetHandler={props.resetHandler} />
         </div>
     )

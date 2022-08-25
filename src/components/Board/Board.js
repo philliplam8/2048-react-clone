@@ -7,6 +7,8 @@ import getArrayValueTotal from "./../../utils/helpers";
 import { useSwipeable } from "react-swipeable";
 import Button from '@mui/material/Button';
 import "./Board.css";
+import NewHighScoreModal from "../Modals/NewHighScoreModal";
+import NotHighScoreModal from "../Modals/NotHighScoreModal";
 
 /* TODO 
 - score should only reflect when 2 tiles merge (need to understand state and context better)
@@ -364,6 +366,8 @@ const Board = () => {
                     <ScoreboardModal />
                 </div>
                 <GameOverModal resetHandler={handleResetBoard} />
+                <NewHighScoreModal resetHandler={handleResetBoard} />
+                <NotHighScoreModal resetHandler={handleResetBoard} />
             </div>
             <div>
                 <button onClick={() => { handleAddTile() }}>Add Tile</button>
