@@ -1,12 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
-import ScoreboardModal from "./ScoreboardModal";
-import GameOverModal from "./GameOverModal";
-import Tile from './Tile';
-import { TileContext } from "../TileContext";
-import getArrayValueTotal from "../utils/helpers";
+import ScoreboardModal from "./../Scoreboard/ScoreboardModal";
+import GameOverModal from "../Modals/GameOverModal";
+import Tile from './../Tile/Tile';
+import { TileContext } from "./../../TileContext";
+import getArrayValueTotal from "./../../utils/helpers";
 import { useSwipeable } from "react-swipeable";
 import Button from '@mui/material/Button';
-import anime from 'animejs/lib/anime.es.js';
 import "./Board.css";
 
 /* TODO 
@@ -59,7 +58,7 @@ const Board = () => {
     /**
      * Revert the game board to a new game state
      */
-    const resetBoard = () => {
+    const handleResetBoard = () => {
         let starterBoard = tiles.myBoard.map(boardTile => {
             return { ...boardTile, value: 0, empty: true, tileStyle: 'tile-zero' };
         });
@@ -69,7 +68,7 @@ const Board = () => {
     /**
      * Create a new tile in a randomized empty position
      */
-    const addTile = () => {
+    const handleAddTile = () => {
         let emptyCells = [];
         for (let i = 0; i < tiles.myBoard.length; i++) {
             if (tiles.myBoard[i].value === 0) {
@@ -270,7 +269,7 @@ const Board = () => {
         // Only add tiles if the there has been an action (move/merge)
         for (let i = 0; i < updatedBoard.length; i++) {
             if (updatedBoard[i].justMoved || updatedBoard[i].justMerged) {
-                addTile();
+                handleAddTile();
                 break;
             }
         }
@@ -281,7 +280,7 @@ const Board = () => {
     useEffect(() => {
         let total = getArrayValueTotal(tiles.myBoard);
         if (total <= 2) {
-            addTile();
+            handleAddTile();
         }
     });
 
@@ -293,7 +292,7 @@ const Board = () => {
             // keyCode for Escape = 27 
             if (e.keyCode === 27) {
                 console.log('You pressed the Escape Key.');
-                resetBoard();
+                handleResetBoard();
             }
 
             // Move Tiles using WASD or Arrow Keys only
@@ -327,7 +326,7 @@ const Board = () => {
                     default:
                         break;
                 }
-                // addTile();
+                // handleAddTile();
             }
         }
 
@@ -341,19 +340,19 @@ const Board = () => {
     const mobileHandlers = useSwipeable({
         onSwipedLeft: () => {
             moveAllTiles("left");
-            // addTile();
+            // handleAddTile();
         },
         onSwipedRight: () => {
             moveAllTiles("right");
-            // addTile();
+            // handleAddTile();
         },
         onSwipedUp: () => {
             moveAllTiles("up");
-            // addTile();
+            // handleAddTile();
         },
         onSwipedDown: () => {
             moveAllTiles("down");
-            // addTile();
+            // handleAddTile();
         }
     });
 
@@ -361,13 +360,13 @@ const Board = () => {
         <div>
             <div>
                 <div className="game-controls">
-                    <Button variant="outlined" onClick={() => { resetBoard() }}>Start Over</Button>
+                    <Button variant="outlined" onClick={() => { handleResetBoard() }}>Start Over</Button>
                     <ScoreboardModal />
                 </div>
-                <GameOverModal />
+                <GameOverModal resetHandler={handleResetBoard} />
             </div>
             <div>
-                <button onClick={() => { addTile() }}>Add Tile</button>
+                <button onClick={() => { handleAddTile() }}>Add Tile</button>
 
             </div>
             <div {...mobileHandlers} className="game">

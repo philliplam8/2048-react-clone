@@ -39,3 +39,14 @@ body {
         width: var(--tile-width);
     }
 }
+
+.game-controls {
+    display: flex;
+    justify-content: center;
+
+}
+
+.game-controls Button {
+    border-radius: '10px';
+    margin: 2px;
+}

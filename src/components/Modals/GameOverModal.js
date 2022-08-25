@@ -18,11 +18,20 @@ const style = {
     textAlign: 'center',
 };
 
-export default function GameOverModal() {
+export default function GameOverModal(props) {
 
+    // Opening/Closing Game Over Modal
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    
+    // Game Over Modal button: Play Again
+    const handlePlayAgain = () => {
+        // Reset the game
+        props.resetHandler();
+        // Close the modal
+        handleClose();
+    }
 
     return (
         <div>
@@ -49,7 +58,7 @@ export default function GameOverModal() {
                         <Typography id="test" className="modal-text" variant="subtitle1">
                             Your score:
                         </Typography>
-                        <Button className="modal-button" variant="contained">Play Again?</Button>
+                        <Button className="modal-button" variant="contained" onClick={handlePlayAgain}>Play Again?</Button>
                     </Box>
                 </Fade>
             </Modal>

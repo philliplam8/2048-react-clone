@@ -1,8 +1,8 @@
 import './App.css';
 import { TileProvider } from "./TileContext";
-import Nav from './components/Nav';
-import Board from './components/Board';
-import Footer from './components/Footer';
+import Nav from './components//Nav/Nav';
+import Board from './components/Board/Board';
+import Footer from './components/Footer/Footer';
 
 function App() {
 

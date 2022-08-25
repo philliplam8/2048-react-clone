@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { TileContext } from "../TileContext";
+import { TileContext } from "../../TileContext";
 import "./Nav.css";
 
 const Nav = () => {
