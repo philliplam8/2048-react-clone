@@ -1,5 +1,6 @@
 const { MongoClient } = require('mongodb');
-
+const dotenv = require("dotenv");
+dotenv.config();
 
 //TODO: mongoDB docs say you should only create one client instance and reuser servlets??
 
@@ -11,7 +12,7 @@ const { MongoClient } = require('mongodb');
  */
 
 // Connection uri
-const uri = "mongodb+srv://admin:nIoCwOUCZQLXmLSP@cluster0.ojile.mongodb.net/?retryWrites=true&w=majority";
+const uri = process.env.mongodbUri;
 
 // Create an instance of the Mongo Client
 const client = new MongoClient(uri);
