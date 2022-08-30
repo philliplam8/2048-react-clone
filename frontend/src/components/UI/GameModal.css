@@ -1,0 +1,16 @@
+.modal-footer {
+    position: inherit;
+    bottom: 10%;
+    left: 5%;
+    width: 90%;
+}
+
+.modal-actions {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.Button {
+    margin: 10px;
+}

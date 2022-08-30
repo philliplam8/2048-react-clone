@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script type="module" src="index.js"></script>
+  </head>
+  <body>
+    <h1>Database CRUD Operations</h1>
+    <div>
+      <h2>Create</h2>
+      <p>Add entry into Database</p>
+      <form action="/scoreboard/rankings/create/" method="get">
+        <label for="input_name">Name:</label>
+        <input type="text" name="input_name" id="name" placeholder="Ex: John" required/>
+        <br />
+        <label for="input_score">Score:</label>
+        <input type="number" name="input_score" id="score" placeholder="3500" required/>
+        <button type="submit" id="submit">Submit</button>
+      </form>
+    </div>
+    <div>
+      <h2>Read</h2>
+      <p>Current Leaderboard</p>
+      <table id="scores"></table>
+    </div>
+  </body>
+</html>

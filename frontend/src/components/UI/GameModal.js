@@ -4,7 +4,9 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import './GameModal.css';
 
 const style = {
     position: 'absolute',
@@ -12,6 +14,7 @@ const style = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: '275px',
+    height: '275px',
     bgcolor: 'background.paper',
     borderRadius: '10px',
     p: 4,
@@ -52,15 +55,25 @@ export default function GameModal(props) {
                         <Typography id="transition-modal-title" className="modal-text" variant="h4" component="div">
                             {props.title}
                         </Typography>
-                        
+
                         <Typography id="subtitle-score" className="modal-text" variant="subtitle1">
-                            {props.scoreSubtitle}
+                            Score:
                         </Typography>
-                        
-                        <Typography id="transition-modal-description" className="modal-text" variant="subtitle2" gutterBottom>
-                            {props.subtitle}
-                        </Typography>
-                        <Button className="modal-button" variant="contained" onClick={handlePlayAgain}>Play Again?</Button>
+
+                        <div className='modal-footer'>
+                            <Typography id="transition-modal-description" className="modal-text" variant="subtitle2" gutterBottom>
+                                {props.subtitle}
+                            </Typography>              
+                            <Typography id="transition-modal-description" className="modal-text" variant="subtitle2" gutterBottom>
+                                Enter your name into the scoreboard:
+                            </Typography>  
+                            <div className='modal-actions'>
+                                <TextField sx={{ m: 0.5 }} id="outlined-basic" label="Name" variant="outlined" />
+                                <Button sx={{ m: 0.5 }} variant="contained">Submit</Button>
+                            </div>
+                        </div>
+                        {/* <Button className="modal-button" variant="outlined" onClick={handlePlayAgain}>Play Again?</Button> */}
+
                     </Box>
                 </Fade>
             </Modal>

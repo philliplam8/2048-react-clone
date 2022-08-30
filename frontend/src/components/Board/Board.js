@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import ScoreboardModal from "./../Scoreboard/ScoreboardModal";
+import ScoreboardModal from "../Modals/Scoreboard/ScoreboardModal";
 import GameOverModal from "../Modals/GameOverModal";
 import Tile from './../Tile/Tile';
 import { TileContext } from "./../../TileContext";
@@ -365,9 +365,6 @@ const Board = () => {
                     <Button variant="outlined" onClick={() => { handleResetBoard() }}>Start Over</Button>
                     <ScoreboardModal />
                 </div>
-                <GameOverModal resetHandler={handleResetBoard} />
-                <NewHighScoreModal resetHandler={handleResetBoard} />
-                <NotHighScoreModal resetHandler={handleResetBoard} />
             </div>
             <div>
                 <button onClick={() => { handleAddTile() }}>Add Tile</button>
@@ -392,6 +389,11 @@ const Board = () => {
                         />
                     ))}
                 </div>
+            </div>
+            <div className="modals-testing">
+                <NewHighScoreModal resetHandler={handleResetBoard} />
+                <NotHighScoreModal resetHandler={handleResetBoard} />
+                <GameOverModal resetHandler={handleResetBoard} />
             </div>
         </div>
     );

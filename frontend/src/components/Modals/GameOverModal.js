@@ -8,8 +8,7 @@ export default function GameOverModal(props) {
             <GameModal
                 buttonName="Game Over"
                 title="GAME OVER!"
-                scoreSubtitle="Your Score: "
-                subtitle="No more moves"
+                subtitle="No more moves."
                 resetHandler={props.resetHandler} />
         </div>
     )

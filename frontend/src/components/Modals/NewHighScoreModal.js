@@ -6,10 +6,9 @@ export default function NewHighScoreModal(props) {
     return (
         <div>
             <GameModal
-                buttonName="New High Score"
+                buttonName="Win - New High Score"
                 title="WIN!"
-                scoreSubtitle="New High Score: "
-                subtitle="Enter your name into the scoreboard"
+                subtitle="You have reached a new high score!"
                 resetHandler={props.resetHandler} />
         </div>
     )
