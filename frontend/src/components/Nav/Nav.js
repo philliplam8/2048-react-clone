@@ -1,14 +1,14 @@
-import React, { useContext } from "react";
-import { TileContext } from "../../TileContext";
+import React, { useContext, useEffect } from "react";
+import { ScoreContext } from "../../ScoreContext";
 import "./Nav.css";
 
-const Nav = () => {
-    const [tiles, setTiles] = useContext(TileContext);
+const Nav = (props) => {
+    const [score, setScore] = useContext(ScoreContext);
 
     return (
         <div className="navbar">
             <h3>2048 Clone</h3>
-            <p>Score: </p>
+            <p>Score: {score}</p>
         </div>
     );
 }

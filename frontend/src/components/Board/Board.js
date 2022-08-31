@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import ScoreboardModal from "../Modals/Scoreboard/ScoreboardModal";
 import GameOverModal from "../Modals/GameOverModal";
 import Tile from './../Tile/Tile';
+import { ScoreContext } from "../../ScoreContext";
 import { TileContext } from "./../../TileContext";
 import getArrayValueTotal from "./../../utils/helpers";
 import { useSwipeable } from "react-swipeable";
@@ -11,7 +12,6 @@ import NewHighScoreModal from "../Modals/NewHighScoreModal";
 import NotHighScoreModal from "../Modals/NotHighScoreModal";
 
 /* TODO 
-- score should only reflect when 2 tiles merge (need to understand state and context better)
 - lose condition
 - win condition
 - undo
@@ -24,6 +24,10 @@ function getRandomTileIndex(range) {
 
 const Board = () => {
     const [tiles, setTiles] = useContext(TileContext);
+    const [score, setScore] = useContext(ScoreContext);
+    // Since multiple tiles can merge in one move, keep track of all score increments with 
+    // tempScore and then use setScore at the end to update the total score increment
+    let tempScore = score; 
 
     const getIndexLeft = (currentIndex) => {
         return currentIndex - 1;
@@ -61,10 +65,15 @@ const Board = () => {
      * Revert the game board to a new game state
      */
     const handleResetBoard = () => {
+
+        // Reset tiles on the board
         let starterBoard = tiles.myBoard.map(boardTile => {
             return { ...boardTile, value: 0, empty: true, tileStyle: 'tile-zero' };
         });
         setTiles({ myBoard: starterBoard });
+
+        // Reset score
+        setScore(0);
     }
 
     /**
@@ -99,13 +108,21 @@ const Board = () => {
      * @param {number} destinationIndex 
      */
     const mergeTiles = (boardArray, currentIndex, destinationIndex) => {
+
         // Reset current tile
         boardArray[currentIndex].value = 0;
         boardArray[currentIndex].tileStyle = "tile-zero";
         boardArray[currentIndex].empty = true;
+
         // Merge tiles
         boardArray[destinationIndex].value *= 2;
         boardArray[destinationIndex].justMerged = true;
+
+        // Update Score
+        // const newScore = score + boardArray[destinationIndex].value;
+        // setScore(newScore);
+        tempScore += boardArray[destinationIndex].value;
+
         // Update styling
         switch (boardArray[destinationIndex].value) {
             case 4:
@@ -267,6 +284,7 @@ const Board = () => {
 
         // Update board
         setTiles({ myBoard: updatedBoard });
+        setScore(tempScore);
 
         // Only add tiles if the there has been an action (move/merge)
         for (let i = 0; i < updatedBoard.length; i++) {

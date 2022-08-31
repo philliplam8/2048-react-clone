@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React, { useContext } from "react";
+import { ScoreContext } from "../../ScoreContext";
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
@@ -36,6 +37,9 @@ export default function GameModal(props) {
         handleClose();
     }
 
+    // Score
+    const [score, setScore] = useContext(ScoreContext);
+
     return (
         <div>
             <Button variant="outlined" onClick={handleOpen}>{props.buttonName}</Button>
@@ -57,16 +61,16 @@ export default function GameModal(props) {
                         </Typography>
 
                         <Typography id="subtitle-score" className="modal-text" variant="subtitle1">
-                            Score:
+                            Score: {score}
                         </Typography>
 
                         <div className='modal-footer'>
                             <Typography id="transition-modal-description" className="modal-text" variant="subtitle2" gutterBottom>
                                 {props.subtitle}
-                            </Typography>              
+                            </Typography>
                             <Typography id="transition-modal-description" className="modal-text" variant="subtitle2" gutterBottom>
                                 Enter your name into the scoreboard:
-                            </Typography>  
+                            </Typography>
                             <div className='modal-actions'>
                                 <TextField sx={{ m: 0.5 }} id="outlined-basic" label="Name" variant="outlined" />
                                 <Button sx={{ m: 0.5 }} variant="contained">Submit</Button>
