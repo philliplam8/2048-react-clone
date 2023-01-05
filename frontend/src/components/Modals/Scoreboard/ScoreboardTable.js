@@ -8,7 +8,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import LoadingSpinner from '../../UI/LoadingIndicator';
 
-const mongoDatabaseEndpoint = 'http://localhost:4000/scoreboard/rankings';
+const mongoDbRankingsEndpoint = process.env.REACT_APP_RANKINGS_ENDPOINT;
 
 function createData(userScore, userName) {
     return { userScore, userName };
@@ -22,7 +22,7 @@ export default function ScoreboardTable() {
 
     // Make AJAX call and use AJAX results to set local state
     useEffect(() => {
-        fetch(mongoDatabaseEndpoint)
+        fetch(mongoDbRankingsEndpoint)
             .then(res => res.json())
             .then(
                 (result) => {

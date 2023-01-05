@@ -24,6 +24,9 @@ const style = {
 
 export default function GameModal(props) {
 
+    // Score
+    const [score, setScore] = useContext(ScoreContext);
+
     // Opening/Closing Modal
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
@@ -37,8 +40,7 @@ export default function GameModal(props) {
         handleClose();
     }
 
-    // Score
-    const [score, setScore] = useContext(ScoreContext);
+
 
     return (
         <div>
@@ -65,16 +67,18 @@ export default function GameModal(props) {
                         </Typography>
 
                         <div className='modal-footer'>
-                            <Typography id="transition-modal-description" className="modal-text" variant="subtitle2" gutterBottom>
-                                {props.subtitle}
-                            </Typography>
-                            <Typography id="transition-modal-description" className="modal-text" variant="subtitle2" gutterBottom>
-                                Enter your name into the scoreboard:
-                            </Typography>
-                            <div className='modal-actions'>
-                                <TextField sx={{ m: 0.5 }} id="outlined-basic" label="Name" variant="outlined" />
-                                <Button sx={{ m: 0.5 }} variant="contained">Submit</Button>
-                            </div>
+                            <form action="/scoreboard/rankings/create/" method="get">
+                                <Typography id="transition-modal-description" className="modal-text" variant="subtitle2" gutterBottom>
+                                    {props.subtitle}
+                                </Typography>
+                                <Typography id="transition-modal-description" className="modal-text" variant="subtitle2" gutterBottom>
+                                    Enter your name into the scoreboard:
+                                </Typography>
+                                <div className='modal-actions'>
+                                    <TextField sx={{ m: 0.5 }} id="name" label="Name" variant="outlined" />
+                                    <Button sx={{ m: 0.5 }} variant="contained">Submit</Button>
+                                </div>
+                            </form>
                         </div>
                         {/* <Button className="modal-button" variant="outlined" onClick={handlePlayAgain}>Play Again?</Button> */}
 
