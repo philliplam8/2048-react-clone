@@ -381,7 +381,7 @@ const Board = () => {
             <div>
                 <div className="game-controls">
                     <Button variant="outlined" onClick={() => { handleResetBoard() }}>Start Over</Button>
-                    <ScoreboardModal />
+                    {/* <ScoreboardModal /> */}
                 </div>
             </div>
             <div>
