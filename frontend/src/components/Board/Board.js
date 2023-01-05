@@ -1,12 +1,17 @@
 import React, { useState, useContext, useEffect } from "react";
-import Tile from './Tile';
-import { TileContext } from "../TileContext";
-import getArrayValueTotal from "../utils/helpers";
+import ScoreboardModal from "../Modals/Scoreboard/ScoreboardModal";
+import GameOverModal from "../Modals/GameOverModal";
+import Tile from './../Tile/Tile';
+import { ScoreContext } from "../../ScoreContext";
+import { TileContext } from "./../../TileContext";
+import getArrayValueTotal from "./../../utils/helpers";
 import { useSwipeable } from "react-swipeable";
-import anime from 'animejs/lib/anime.es.js';
+import Button from '@mui/material/Button';
 import "./Board.css";
+import NewHighScoreModal from "../Modals/NewHighScoreModal";
+import NotHighScoreModal from "../Modals/NotHighScoreModal";
+
 /* TODO 
-- score should only reflect when 2 tiles merge (need to understand state and context better)
 - lose condition
 - win condition
 - undo
@@ -19,6 +24,10 @@ function getRandomTileIndex(range) {
 
 const Board = () => {
     const [tiles, setTiles] = useContext(TileContext);
+    const [score, setScore] = useContext(ScoreContext);
+    // Since multiple tiles can merge in one move, keep track of all score increments with 
+    // tempScore and then use setScore at the end to update the total score increment
+    let tempScore = score;
 
     const getIndexLeft = (currentIndex) => {
         return currentIndex - 1;
@@ -55,17 +64,22 @@ const Board = () => {
     /**
      * Revert the game board to a new game state
      */
-    const resetBoard = () => {
+    const handleResetBoard = () => {
+
+        // Reset tiles on the board
         let starterBoard = tiles.myBoard.map(boardTile => {
             return { ...boardTile, value: 0, empty: true, tileStyle: 'tile-zero' };
         });
         setTiles({ myBoard: starterBoard });
+
+        // Reset score
+        setScore(0);
     }
 
     /**
      * Create a new tile in a randomized empty position
      */
-    const addTile = () => {
+    const handleAddTile = () => {
         let emptyCells = [];
         for (let i = 0; i < tiles.myBoard.length; i++) {
             if (tiles.myBoard[i].value === 0) {
@@ -94,13 +108,21 @@ const Board = () => {
      * @param {number} destinationIndex 
      */
     const mergeTiles = (boardArray, currentIndex, destinationIndex) => {
+
         // Reset current tile
         boardArray[currentIndex].value = 0;
         boardArray[currentIndex].tileStyle = "tile-zero";
         boardArray[currentIndex].empty = true;
+
         // Merge tiles
         boardArray[destinationIndex].value *= 2;
         boardArray[destinationIndex].justMerged = true;
+
+        // Update Score
+        // const newScore = score + boardArray[destinationIndex].value;
+        // setScore(newScore);
+        tempScore += boardArray[destinationIndex].value;
+
         // Update styling
         switch (boardArray[destinationIndex].value) {
             case 4:
@@ -132,6 +154,24 @@ const Board = () => {
                 break;
             case 2048:
                 boardArray[destinationIndex].tileStyle = "tile-twentyfourtyeight";
+                break;
+            case 4096:
+                boardArray[destinationIndex].tileStyle = "tile-fourtyninetysix";
+                break;
+            case 8192:
+                boardArray[destinationIndex].tileStyle = "tile-eightyonenintytwo";
+                break;
+            case 16384:
+                boardArray[destinationIndex].tileStyle = "tile-sixteenthreeeightyfour";
+                break;
+            case 32768:
+                boardArray[destinationIndex].tileStyle = "tile-thirtytwosevensixtyeight";
+                break;
+            case 65536:
+                boardArray[destinationIndex].tileStyle = "sixtyfivefivethirtysix";
+                break;
+            case 131072:
+                boardArray[destinationIndex].tileStyle = "onethirtyonezeroseventytwo";
                 break;
             default:
                 console.log("No styling beyond 2048");
@@ -244,11 +284,12 @@ const Board = () => {
 
         // Update board
         setTiles({ myBoard: updatedBoard });
+        setScore(tempScore);
 
         // Only add tiles if the there has been an action (move/merge)
         for (let i = 0; i < updatedBoard.length; i++) {
             if (updatedBoard[i].justMoved || updatedBoard[i].justMerged) {
-                addTile();
+                handleAddTile();
                 break;
             }
         }
@@ -259,7 +300,7 @@ const Board = () => {
     useEffect(() => {
         let total = getArrayValueTotal(tiles.myBoard);
         if (total <= 2) {
-            addTile();
+            handleAddTile();
         }
     });
 
@@ -271,7 +312,7 @@ const Board = () => {
             // keyCode for Escape = 27 
             if (e.keyCode === 27) {
                 console.log('You pressed the Escape Key.');
-                resetBoard();
+                handleResetBoard();
             }
 
             // Move Tiles using WASD or Arrow Keys only
@@ -305,7 +346,7 @@ const Board = () => {
                     default:
                         break;
                 }
-                // addTile();
+                // handleAddTile();
             }
         }
 
@@ -319,27 +360,33 @@ const Board = () => {
     const mobileHandlers = useSwipeable({
         onSwipedLeft: () => {
             moveAllTiles("left");
-            // addTile();
+            // handleAddTile();
         },
         onSwipedRight: () => {
             moveAllTiles("right");
-            // addTile();
+            // handleAddTile();
         },
         onSwipedUp: () => {
             moveAllTiles("up");
-            // addTile();
+            // handleAddTile();
         },
         onSwipedDown: () => {
             moveAllTiles("down");
-            // addTile();
+            // handleAddTile();
         }
     });
 
     return (
         <div>
             <div>
-                <button onClick={() => { addTile() }}>Add Tile</button>
-                <button onClick={() => { resetBoard() }}>Start Over</button>
+                <div className="game-controls">
+                    <Button variant="outlined" onClick={() => { handleResetBoard() }}>Start Over</Button>
+                    <ScoreboardModal />
+                </div>
+            </div>
+            <div>
+                {/* <button onClick={() => { handleAddTile() }}>Add Tile</button> */}
+
             </div>
             <div {...mobileHandlers} className="game">
 
@@ -361,6 +408,11 @@ const Board = () => {
                     ))}
                 </div>
             </div>
+            {/* <div className="modals-testing">
+                <NewHighScoreModal resetHandler={handleResetBoard} />
+                <NotHighScoreModal resetHandler={handleResetBoard} />
+                <GameOverModal resetHandler={handleResetBoard} />
+            </div> */}
         </div>
     );
 }
