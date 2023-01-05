@@ -27,7 +27,7 @@ const Board = () => {
     const [score, setScore] = useContext(ScoreContext);
     // Since multiple tiles can merge in one move, keep track of all score increments with 
     // tempScore and then use setScore at the end to update the total score increment
-    let tempScore = score; 
+    let tempScore = score;
 
     const getIndexLeft = (currentIndex) => {
         return currentIndex - 1;
@@ -385,7 +385,7 @@ const Board = () => {
                 </div>
             </div>
             <div>
-                <button onClick={() => { handleAddTile() }}>Add Tile</button>
+                {/* <button onClick={() => { handleAddTile() }}>Add Tile</button> */}
 
             </div>
             <div {...mobileHandlers} className="game">
@@ -408,11 +408,11 @@ const Board = () => {
                     ))}
                 </div>
             </div>
-            <div className="modals-testing">
+            {/* <div className="modals-testing">
                 <NewHighScoreModal resetHandler={handleResetBoard} />
                 <NotHighScoreModal resetHandler={handleResetBoard} />
                 <GameOverModal resetHandler={handleResetBoard} />
-            </div>
+            </div> */}
         </div>
     );
 }
